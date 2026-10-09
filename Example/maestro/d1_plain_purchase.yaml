@@ -1,0 +1,22 @@
+# D1: plain purchase with 4111 1111 1111 1111, 12/30, 123 and the prefilled billing address.
+# Run: maestro test -e SLUG=<slug> maestro/d1_plain_purchase.yaml
+# With 3DS on, the sandbox ACS challenges this card; run it with 3DS off, or approve by hand.
+appId: com.paysio.sdkexample
+---
+- runFlow: open_sheet.yaml
+- runFlow:
+    file: fill_card.yaml
+    env:
+      NUMBER: "4111111111111111"
+      EXPIRY: "1230"
+      CVC: "123"
+- tapOn:
+    text: "Pay .*"
+# On success the example closes the sheet and writes "Paid: <order> (<status>)".
+- scrollUntilVisible:
+    element:
+      text: "Paid: .*|Error .*"
+    timeout: 60000
+- takeScreenshot: d1_result
+- assertVisible:
+    text: "Paid: .*"

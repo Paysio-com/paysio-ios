@@ -1,0 +1,4 @@
+# SwiftPM build state. A library does not pin its dependencies, so Package.resolved stays local.
+.build/
+.swiftpm/
+Package.resolved

@@ -1,0 +1,17 @@
+# D7: invalid number (Luhn), past expiry, 2-digit CVC. Pass when the fields show errors
+# after blur and Pay stays disabled.
+appId: com.paysio.sdkexample
+---
+- runFlow: open_sheet.yaml
+- runFlow:
+    file: fill_card.yaml
+    env:
+      NUMBER: "4111111111111112"
+      EXPIRY: "0120"
+      CVC: "12"
+# Blur the CVC field.
+- tapOn: "Payment method"
+- takeScreenshot: d7_errors
+- assertVisible:
+    text: "Pay .*"
+    enabled: false

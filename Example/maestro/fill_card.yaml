@@ -1,0 +1,13 @@
+# Fills phone + card on an open sheet. Pass NUMBER, EXPIRY and CVC through runFlow env
+# (a subflow's own env block would override the caller's values, so there are no defaults here).
+appId: com.paysio.sdkexample
+---
+# The test workspace has requireCheckoutPhone on.
+- tapOn: "Phone"
+- inputText: "5125550100"
+- tapOn: "0000 0000 0000 0000"
+- inputText: ${NUMBER}
+- tapOn: "MM / YY"
+- inputText: ${EXPIRY}
+- tapOn: "CVC"
+- inputText: ${CVC}

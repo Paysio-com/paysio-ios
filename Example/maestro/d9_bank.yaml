@@ -1,0 +1,33 @@
+# D9: bank account, routing 490000018, account 24413815, Checking, Personal, consent.
+# Pass when the result is Paid (pending_settlement) with an order label.
+appId: com.paysio.sdkexample
+---
+- runFlow: open_sheet.yaml
+# The test workspace has requireCheckoutPhone on.
+- tapOn: "Phone"
+- inputText: "5125550100"
+- tapOn: "Bank account"
+- tapOn: "Routing number"
+- inputText: "490000018"
+- tapOn: "Account number"
+- inputText: "24413815"
+- tapOn: "Payment method"
+- scrollUntilVisible:
+    element: "Authorize the bank debit"
+    optional: true
+- tapOn:
+    text: "Authorize the bank debit"
+    optional: true
+- takeScreenshot: d9_filled
+- scrollUntilVisible:
+    element:
+      text: "Pay .*"
+- tapOn:
+    text: "Pay .*"
+- scrollUntilVisible:
+    element:
+      text: "Paid: .*|Error .*"
+    timeout: 60000
+- takeScreenshot: d9_result
+- assertVisible:
+    text: "Paid: .*"

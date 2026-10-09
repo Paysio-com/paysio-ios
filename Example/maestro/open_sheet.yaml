@@ -1,0 +1,15 @@
+# Opens the payment sheet against production with the sandbox slug in ${SLUG}.
+# Run: maestro test -e SLUG=<slug> maestro/open_sheet.yaml
+appId: com.paysio.sdkexample
+---
+- launchApp:
+    clearState: true
+- tapOn: "Production"
+- tapOn: "Session slug (api-...)"
+- inputText: ${SLUG}
+# hideKeyboard cannot dismiss a Form text field; tapping the title does.
+- tapOn: "Paysio SDK"
+- scrollUntilVisible:
+    element: "Open payment sheet"
+- tapOn: "Open payment sheet"
+- takeScreenshot: open_sheet

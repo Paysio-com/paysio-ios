@@ -1,0 +1,34 @@
+# XcodeGen spec for the Paysio iOS example app. Generate the project with:
+#   cd sdks/ios/Example && xcodegen
+# The generated PaysioExample.xcodeproj is not tracked; regenerate it from this file.
+name: PaysioExample
+options:
+  bundleIdPrefix: com.paysio
+  deploymentTarget:
+    iOS: "16.0"
+packages:
+  Paysio:
+    path: ..
+targets:
+  PaysioExample:
+    type: application
+    platform: iOS
+    sources:
+      - path: .
+        includes:
+          - "*.swift"
+    dependencies:
+      - package: Paysio
+        product: Paysio
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.paysio.sdkexample
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Paysio SDK
+        CODE_SIGN_STYLE: Automatic

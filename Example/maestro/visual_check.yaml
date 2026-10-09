@@ -1,0 +1,16 @@
+# Visual check: filled card (detected brand), then the country bottom sheet with a search.
+appId: com.paysio.sdkexample
+---
+- runFlow: open_sheet.yaml
+- runFlow:
+    file: fill_card.yaml
+    env:
+      NUMBER: "4111111111111111"
+      EXPIRY: "1230"
+      CVC: "123"
+- tapOn: "Card information"
+- takeScreenshot: card_filled
+- tapOn: "Country"
+- takeScreenshot: country_sheet
+- inputText: "Can"
+- takeScreenshot: country_search

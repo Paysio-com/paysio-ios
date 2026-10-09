@@ -1,0 +1,7 @@
+# Scrolls the example to the Result line and screenshots it (no relaunch).
+appId: com.paysio.sdkexample
+---
+- scrollUntilVisible:
+    element:
+      text: "Paid: .*|Error .*"
+- takeScreenshot: result

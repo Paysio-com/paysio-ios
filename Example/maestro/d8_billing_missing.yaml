@@ -1,0 +1,18 @@
+# D8: valid card, empty street. Pass when Pay is blocked (disabled, or refused with the
+# street error and no charge).
+appId: com.paysio.sdkexample
+---
+- runFlow: open_sheet.yaml
+- runFlow:
+    file: fill_card.yaml
+    env:
+      NUMBER: "4111111111111111"
+      EXPIRY: "1230"
+      CVC: "123"
+- tapOn: "1 Main St"
+- eraseText: 20
+- tapOn: "Payment method"
+- takeScreenshot: d8_street_empty
+- assertVisible:
+    text: "Pay .*"
+    enabled: false

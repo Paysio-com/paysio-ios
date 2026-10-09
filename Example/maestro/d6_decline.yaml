@@ -1,0 +1,22 @@
+# D6: decline. Pass when the result is "Error declined: ..." (the SDK maps a processor
+# decline to code `declined` with a declineCode). Override the card with -e NUMBER=.
+appId: com.paysio.sdkexample
+env:
+  NUMBER: "4000000000000002"
+---
+- runFlow: open_sheet.yaml
+- runFlow:
+    file: fill_card.yaml
+    env:
+      NUMBER: ${NUMBER}
+      EXPIRY: "1230"
+      CVC: "123"
+- tapOn:
+    text: "Pay .*"
+- extendedWaitUntil:
+    visible:
+      text: ".*declined.*|Paid: .*|Error .*"
+    timeout: 60000
+- takeScreenshot: d6_result
+- assertVisible:
+    text: ".*declined.*"
